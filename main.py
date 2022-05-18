@@ -1,28 +1,24 @@
+import tkinter as tk
+from tkinter import NW, YES, BOTH
+from pandas import read_csv
+from sklearn import metrics
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
-import numpy
-from pandas import read_csv
-import csv
-from sklearn.preprocessing import LabelEncoder
-from sklearn import preprocessing
-import xlrd
-import tkinter as tk
-from tkinter import filedialog
-import pandas as pd
-from pandas import DataFrame
-from sklearn.tree import export_graphviz
 
 col_names = ['title', 'text', 'subject', 'date', 'True or Fake']
 dataset = read_csv('True and Fake.csv', header=None, names=col_names)
 
 root = tk.Tk()
 root.title('Fake News Detector')
-canvas1 = tk.Canvas(root, width=600, height=600, relief='groove')
-canvas1.pack()
+bg_img = tk.PhotoImage(file="bg2.png")
+bg_img_label = tk.Label(root, image=bg_img)
+canvas1 = tk.Canvas(root, width=600, height=600, relief='groove', bg='#c2c2c2')
+canvas1.pack(expand=YES, fill=BOTH)
+# bg_img_label.pack()
 
-label1 = tk.Label(root, text="Fake News Detector")
+label1 = tk.Label(root, text="Fake News Detector", bg='#c2c2c2')
 label1.config(font=('Times', 20, 'bold'))
 canvas1.create_window(300, 30, window=label1)
 
@@ -36,8 +32,8 @@ def PrintDatasetWindow():
     canvas2.create_window(80, 100, window=label2)
 
 
-PrintDatasetButton = tk.Button(text='Print Dataset', command=PrintDatasetWindow, bg='brown', fg='white',
-                               font=('Times', 10, 'bold'))
+img1 = tk.PhotoImage(file="button_print-the-dataset (2).png")
+PrintDatasetButton = tk.Button(text='Print Dataset', image=img1, command=PrintDatasetWindow, border='0', bg='#c2c2c2')
 canvas1.create_window(80, 100, window=PrintDatasetButton)
 
 
@@ -54,8 +50,8 @@ def DataPreprocessingWindow():
                       font=('Times', 12, 'bold')).place(x=30, y=70)
 
 
-ProcessDataButton = tk.Button(text='Preprocess the data', command=DataPreprocessingWindow, bg='brown', fg='white',
-                              font=('Times', 10, 'bold'))
+img2 = tk.PhotoImage(file="button_preprocess-the-data (1).png")
+ProcessDataButton = tk.Button(image=img2, command=DataPreprocessingWindow, bg='#c2c2c2', border='0')
 
 canvas1.create_window(80, 170, window=ProcessDataButton)
 
@@ -91,8 +87,8 @@ def SplitDataWindow():
     new_canvas.create_window(100, 400, window=label4)
 
 
-SplitDataButton = tk.Button(text='Split the dataset', command=SplitDataWindow, bg='brown', fg='white',
-                            font=('Times', 10, 'bold'))
+img3 = tk.PhotoImage(file="button_split-the-dataset.png")
+SplitDataButton = tk.Button(image=img3, command=SplitDataWindow, bg='#c2c2c2', border='0')
 canvas1.create_window(80, 240, window=SplitDataButton)
 
 
@@ -114,8 +110,8 @@ def DecisionTreeClassifier1():
     canvas2.create_window(100, 80, window=label_accuracy2)
 
 
-DecisionTreeClassifierButton = tk.Button(text='Apply Decision Tree Classifier', command=DecisionTreeClassifier1,
-                                         bg='brown', fg='white', font=('times', 10, 'bold'))
+img4 = tk.PhotoImage(file="button_apply-decision-tree-classifier (1).png")
+DecisionTreeClassifierButton = tk.Button(image=img4, command=DecisionTreeClassifier1, bg='#c2c2c2', border='0')
 canvas1.create_window(360, 100, window=DecisionTreeClassifierButton)
 
 
@@ -128,7 +124,8 @@ def KnnWindow():
     canvas3.create_window(100, 50, window=label_neighbors)
     entry_neighbors = tk.Entry(window3)
     canvas3.create_window(100, 80, window=entry_neighbors)
-    #n_neighbors = int(float(entry_neighbors.get()))
+    # n_neighbors = int(entry_neighbors.get())
+
     knn = KNeighborsClassifier(n_neighbors=5)
     knn.fit(x_train, y_train.values.ravel())
     y_predict_knn = knn.predict(x_test)
@@ -140,7 +137,7 @@ def KnnWindow():
     canvas3.create_window(100, 230, window=label_accuracy2)
 
 
-KNeighborsButton = tk.Button(text='Apply KNeighbors', command=KnnWindow,
-                             bg='brown', fg='white', font=('times', 10, 'bold'))
+img5 = tk.PhotoImage(file="button_apply-kn-neighbors.png")
+KNeighborsButton = tk.Button(image=img5, command=KnnWindow, bg='#c2c2c2', border='0')
 canvas1.create_window(360, 170, window=KNeighborsButton)
 root.mainloop()
